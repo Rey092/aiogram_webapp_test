@@ -20,6 +20,15 @@ async def command_start(message: Message, bot: Bot, base_url: str):
     await message.answer("""Hi!\nSend me any type of message to start.\nOr just send /webview""")
 
 
+@my_router.message(Command(commands=["google"]))
+async def command_start(message: Message, bot: Bot, base_url: str):
+    await bot.set_chat_menu_button(
+        chat_id=message.chat.id,
+        menu_button=MenuButtonWebApp(text="Open Google", web_app=WebAppInfo(url=f"https://google.com")),
+    )
+    await message.answer("""Hi!\nSend me any type of message to start.\nOr just send /webview""")
+
+
 @my_router.message(Command(commands=["webview"]))
 async def command_webview(message: Message, base_url: str):
     await message.answer(
