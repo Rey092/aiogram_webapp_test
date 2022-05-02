@@ -23,3 +23,5 @@ RUN pip install -r ./requirements.txt
 
 # install app
 COPY . .
+
+CMD ["python", "main.py"]
