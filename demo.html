@@ -17,7 +17,6 @@
 
         Telegram.WebApp.onEvent('themeChanged', setThemeClass);
         setThemeClass();
-
     </script>
     <style>
         body {
@@ -176,6 +175,36 @@
 </head>
 <body style="visibility: hidden;">
 <section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js"></script>
+    <div id="app">
+        There are some things here before like {{ stuff }}
+        but when you press
+        <button @click="clicked()">add more</button>
+        you can add more things here:
+        <div id="more"></div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                stuff: 'inserted message'
+            },
+            methods: {
+                clicked() {
+                    // Add new
+                    new Vue({
+                        template: `<h1 style="color: red;">{{ message }}</h1>`,
+                        parent: this,
+                        data: {
+                            message: 'new message'
+                        }
+                    }).$mount(document.getElementById('more'))
+                }
+            }
+        })
+    </script>
+    <h1>-----------</h1>
+
     <button onclick="alert('hello')">Hello</button>
     <button id="main_btn" onclick="sendMessage('');">Send «Hello, World!»</button>
     <button id="with_webview_btn" onclick="sendMessage('', true);">
